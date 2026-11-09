@@ -1,0 +1,51 @@
+{% extends 'blogApp/base.html' %}
+{% load static %}
+{% block title %}BLOGS - Register{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content:center">
+    <div>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        <h1>Register</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name"
+                    placeholder="First Name {% if first_name %}{{ first_name }}{% endif %}" name="first_name" required>
+            </div>
+            <br>
+            <div>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" placeholder="Last Name {% if last_name %}{{ last_name }}{% endif %}"
+                    name="last_name" required>
+            </div>
+            <br>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Email Id {% if email %}{{ email }}{% endif %}" name="email"
+                    required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Password" name="password" required>
+            </div>
+            <br>
+            <div>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" placeholder="Confirm Password" name="confirm_password"
+                    required>
+            </div>
+            <br>
+            <div>
+                <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

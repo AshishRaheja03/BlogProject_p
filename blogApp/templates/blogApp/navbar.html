@@ -1,0 +1,27 @@
+<nav style="display: flex; align-items: center; background-color: #dbe4ec9f;">
+    <div style="display: flex; justify-content: space-between; width: 100%; ">
+        <div style="display: flex; justify-content: space-around; width: 100%;">
+            <ul style=" display: flex; justify-content: space-around; width: 100%;">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home' %}">About Us</a></li>
+                <li><a href="{% url 'submit_blog' %}">Submit Blog</a></li>
+            </ul>
+        </div>
+        {% if user.is_authenticated %}
+        <div style="display: flex; justify-content: flex-end; width: 100%;">
+            <h4><a href="{% url 'dashboard' user.username %}">Welcome, {{ user.username }}!</a></h4>
+            <ul style="display: flex;justify-content: space-around;">
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </div>
+        {% else %}
+        <div style="display: flex; justify-content: space-around; width: 100%;">
+            <ul style="display: flex;justify-content: space-around; width: 100%;">
+                <li><a href=" {% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Register</a></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <hr>
+</nav>

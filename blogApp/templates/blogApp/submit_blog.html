@@ -1,0 +1,22 @@
+{% extends 'blogApp/base.html' %}
+
+{% block title %}Submit a Blog{% endblock %}
+
+{% block content %}
+
+<div>
+    <h2>Submit a Blog</h2>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+
+            <input type="text" name="title" placeholder="Enter blog title" required><br>
+            <input type="file" name="thumbnail"><br>
+            <textarea name="content" placeholder="Start writing your blog..." required
+                style="width: 80%; height: 100px;"></textarea><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

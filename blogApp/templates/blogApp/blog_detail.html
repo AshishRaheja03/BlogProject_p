@@ -1,0 +1,16 @@
+{% extends 'blogApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    {% if blog.thumbnail %}
+    <img src="{{ blog.thumbnail.url }}" alt="Blog Thumbnail">
+    {% else %}
+    <img src="{% static 'blogApp/default_thumbnail.jpg' %}" alt="Default Thumbnail">
+    {% endif %}
+    <h1>{{ blog.title }}</h1>
+    <h4>by {{ blog.author}}</h4>
+    <p>{{ blog.content }}</p>
+</div>
+
+{% endblock %}
