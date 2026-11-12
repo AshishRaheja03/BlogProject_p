@@ -12,5 +12,18 @@
     <h4>by {{ blog.author}}</h4>
     <p>{{ blog.content }}</p>
 </div>
+{% if summary %}
+<div>
+    <h2>Summary:</h2>
+    <p>{{ summary }}</p>
+</div>
+{% else %}
+<div>
+    <form action="{% url 'blog_detail' blog_pk %}" method="get">
+        <button type="submit" name="summarize" onclick="this.textContent = 'Summarizing. . .'">Summarize</button>
+    </form>
+</div>
+
+{% endif %}
 
 {% endblock %}

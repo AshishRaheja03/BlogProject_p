@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Blog
 from django.contrib.auth.models import User
 from django.contrib  import messages
+from google import genai
+
 
 
 # Create your views here.
@@ -10,8 +12,18 @@ def blogsListView(request):
     return render(request, 'blogApp/blogs_list.html', {'all_blogs': all_blogs})
 
 def blogDetailView(request, blog_pk):
-   blog = Blog.objects.get(pk=blog_pk)
-   return render(request, 'blogApp/blog_detail.html', {'blog': blog})
+   blog = Blog.objects.get(pk=blog_pk)  
+   summary = None 
+   if("summarize" in request.GET):
+       client = genai.Client(api_key = "Key")
+       interaction = client.interactions.create(
+           model="gemini-3.8-flash",
+           input="summarize the following text in not more than 50 words: \n\n" + blog.content
+           )
+       print(interaction.output_text)
+       summary = interaction.output_text 
+    #    summary = "HELLO"
+   return render(request, 'blogApp/blog_detail.html', {'blog': blog, 'blog_pk': blog_pk, 'summary': summary})
 
 def userDashboardView(request, username):
     user = User.objects.get(username=username)
